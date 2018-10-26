@@ -1,0 +1,212 @@
+<html>
+<head>
+    <title> break the bricks</title>
+    </head>
+    <body>
+        <p>press the left & right arrows to move the paddle everytime you hit the brick with the ball you score more point and the each brick you need to hit one more time than the one under it to get broken get the full score to clear the game <h1>click to start the game</h1></p>
+    <canvas id="mycanv" width="800" height="500" style="border:solid"></canvas>
+    <script>
+var canv = document.getElementById("mycanv");
+var ctx = canv.getContext("2d");
+
+var rightPressed = false;
+var leftPressed = false;
+var brCount =Math.round(10*Math.random())+4;
+var bcCount = Math.round(10*Math.random())+1;
+var bWidth = 75;
+var bHeight = 20;
+var bPadding = 10;
+canv.width=(brCount*bWidth)+(10*brCount+50);
+var ballr = 10;
+var x = canv.width/2;
+var y = canv.height-30;
+var dx = 8;
+var dy = -6;
+var paddleHeight = 10;
+var paddleWidth = 150;
+var paddleX = (canv.width-paddleWidth)/2;
+var bOffsetTop = 30;
+var bOffsetLeft = 30;
+var score = 0;
+var lives = 3;
+var bs = [];
+var hit=[];
+        var hits;
+        var background=new Image();
+        background.src="images.jpg";
+        var hits=0
+var running=false;
+        var frame;
+for(c=0; c<bcCount; c++) {
+    bs[c] = [];
+    hit[c]=[];
+        hits=hits+(Math.abs(c-bcCount)*brCount);
+    for(r=0; r<brCount; r++) {
+        bs[c][r] = { x: 0, y: 0, status: 1 };
+    hit[c][r]=Math.abs(c-bcCount);
+    }
+}
+        
+         document.addEventListener('mouseout',function(e){window.cancleAnimationFrame(frame);running=false;} );
+        document.addEventListener('click',function(e){if (!running){frame=window.requestAnimationFrame(draw);running=true;}});
+document.addEventListener("keydown", keyDownHandler, true);
+document.addEventListener("keyup", keyUpHandler, true);
+        
+function keyDownHandler(e) {
+    if(e.keyCode == 39) {
+        rightPressed = true;
+    }
+    else if(e.keyCode == 37) {
+        leftPressed = true;
+    }
+}
+function keyUpHandler(e) {
+    if(e.keyCode == 39) {
+        rightPressed = false;
+    }
+    else if(e.keyCode == 37) {
+        leftPressed = false;
+    }
+}
+function collisionDetection() {
+    for(c=0; c<bcCount; c++) {
+        for(r=0; r<brCount; r++) {
+            var b = bs[c][r];
+            if(b.status == 1) {
+                if(x > b.x && x < b.x+bWidth && y > b.y && y < b.y+bHeight) {
+                    hit[c][r]=hit[c][r]-1;
+                    if(hit[c][r]==0){
+                    dy = -dy;
+                    b.status = 0;
+                    score++;
+                    if(score ==hits ) {
+                        alert("YOU WIN, CONGRATS!");
+                        document.location.reload();
+                    }
+                }
+                else{dy=-dy;dx=-dx;score++;}
+                }
+            }
+        }
+    }
+}
+
+function drawBall() {
+    ctx.beginPath();
+    ctx.arc(x, y, ballr, 0, Math.PI*2);
+    ctx.fillStyle = '#000000';
+    ctx.fill();
+    ctx.closePath();
+}
+function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canv.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = "silver";
+    ctx.fill();
+    ctx.closePath();
+}
+function drawbs() {
+    for(c=0; c<bcCount; c++) {
+        for(r=0; r<brCount; r++) {
+            if(bs[c][r].status == 1) {
+                var bX = (r*(bWidth+bPadding))+bOffsetLeft;
+                var bY = (c*(bHeight+bPadding))+bOffsetTop;
+                bs[c][r].x = bX;
+                bs[c][r].y = bY;
+                ctx.beginPath();
+                ctx.rect(bX, bY, bWidth, bHeight);
+                if(hit[c][r]==1){
+                ctx.fillStyle = "#ff0000";}
+                if(hit[c][r]==2){
+                ctx.fillStyle = "#0079f8";}
+                if(hit[c][r]==3){
+                ctx.fillStyle = "#4547ff";}
+                 if(hit[c][r]==4){
+                ctx.fillStyle = "#000fff";}
+                 if(hit[c][r]==5){
+                ctx.fillStyle = "#11f045";}
+                if(hit[c][r]==6){
+                ctx.fillStyle = "#121642";}
+                if(hit[c][r]==7){
+                ctx.fillStyle = "#988725";}
+                if(hit[c][r]==8){
+                ctx.fillStyle = "#aa0011";}
+                if(hit[c][r]==9){
+                ctx.fillStyle = "#bbbbbb";}
+                ctx.fill();
+                if(hit[c][r]==10){
+                ctx.fillStyle = "#000000";}
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+    }
+}
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText(" Score: "+score+" from: "+hits+" points", 8, 20);
+}
+function drawLives() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#black";
+    ctx.fillText("Lives: "+lives, canv.width-65, 20);
+}
+function draw() {
+    ctx.clearRect(0, 0, canv.width, canv.height);
+    ctx.drawImage(background,0, 0,canv.width,canv.height);
+    drawbs();
+    drawBall();
+    drawPaddle();
+    drawScore();
+    drawLives();
+    collisionDetection();
+    
+    if(x + dx > canv.width-ballr || x + dx < ballr) {
+        dx = -dx;
+    }
+    if(y + dy < ballr) {
+        dy = -dy;
+    }
+    else if(y + dy > canv.height-ballr) {
+        if(x > paddleX && x < paddleX + paddleWidth) {
+            dy = -dy;
+        }
+        else {
+            lives--;
+            if(!lives) {
+                alert("GAME OVER");
+                document.location.reload();
+            }
+            else {
+                x = canv.width/2;
+                y = canv.height-30;
+                dx = 3;
+                dy = -3;
+                paddleX = (canv.width-paddleWidth)/2;
+            }
+        }
+    }
+    
+    if(rightPressed && paddleX < canv.width-paddleWidth) {
+        paddleX += 7;
+    }
+    else if(leftPressed && paddleX > 0) {
+        paddleX -= 7;
+    }
+    
+    x += dx;
+    y += dy;
+    
+        frame=window.requestAnimationFrame(draw);
+}window.onload = function() {ctx.drawImage(background,0, 0,canv.width,canv.height);}
+        drawBall();
+        drawLives();
+        drawbs();
+        drawPaddle();
+        drawScore();
+
+        </script>
+    <h5>by Mohamed Abu el_magd</h5>
+    </body>
+</html>
