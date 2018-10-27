@@ -1,0 +1,106 @@
+<html>
+<head></head>
+    <body>
+    <canvas id="s" width="900" height="900" style="border:solid">
+        </canvas>
+        <script>
+        var canv1=document.getElementById('s');
+            var context=canv1.getContext('2d');
+            var frame;
+            var running=false;
+            var ball={
+                x:100,y:100,r:25, c:'red',vx:5,vy:5,
+                draw:function(){
+                context.beginPath();
+ context.arc(this.x,this.y,this.r,0,Math.PI*2,true);
+                context.fillStyle=this.c;
+                context.fill();
+            }
+            };
+            var square{
+                x1:700,y1:700,x2:700,y2:750,x3:750,y3:750,x4:750,y4:700,c:'green',vx:5,vy:5,x:725,y:725,
+                    draw:function(){
+                        context.beginPath();
+                        context.lineTo(this.x1,this.y1);
+                        context.moveTo(this.x2,this.y2);
+                        context.moveTo(this.x3,this.y3);
+                        context.moveTo(this.x4,this.y4);
+                        context.moveTo(this.x1,this.y1);
+                        context.closePath();
+                        context.fillStyle=this.c;
+                        context.fill();
+                    }
+            };
+            var triangle{x1:100,y1:700,x2:100,y2:750,x3:150,y3:750,c:'gray',vx:5,vy:5,x:125,y:725,
+                    draw:function(){
+                        context.beginPath();
+                        context.lineTo(this.x1,this.y1);
+                        context.moveTo(this.x2,this.y2);
+                        context.moveTo(this.x3,this.y3);
+                        context.moveTo(this.x1,this.y1);
+                        context.closePath();
+                        context.fillStyle=this.c;
+                        context.fill();
+                    }};
+            function draw1(){
+                clear();
+                ball.draw();
+                ball.x+=ball.vx;
+                ball.y+=ball.vy;
+                if(ball.x+ball.r>canv1.width||ball.x-ball.r<0){ball.vx=-ball.vx;}
+                    if(ball.y+ball.r>canv1.height||ball.y-ball.r<0){ball.vy=-ball.vy;}
+                frame=window.requestAnimationFrame(draw);
+            }
+            function draw2(){
+               clear();  
+                square.draw();
+                square.x1 +=sq.vx;
+                square.x2+=sq.vx;
+                square.x3 +=sq.vx;
+                square.x4 +=sq.vx;
+                 square.y1+=square.vy;
+                square.y2+=square.vy;
+                square.y3+=square.vy;
+                square.y4+=square.vy;
+                if(square.x+25>canv1.width||square.x-25<0){square.vx=-square.vx;}
+                    if(square.y+25>canv1.height||square.y-25<0){square.vy=-square.vy;}
+                 frame=window.requestAnimationFrame(draw);
+            }
+            function draw3(){
+                clear();
+                triangle.draw();
+                triangle.x1+=triangle.vx;
+                triangle.x2+=triangle.vx;
+                triangle.x3+=triangle.vx;
+                triangle.y1+=triangle.vy;
+                triangle.y2+=triangle.vy;
+                triangle.y3+=triangle.vy;
+                 if(triangle.x+25>canv1.width||triangle.x-25<0){triangle.vx=-triangle.vx;}
+                    if(triangle.y+24>canv1.height||triangle.y-25<0){triangle.vy=-triangle.vy;}
+                 frame=window.requestAnimationFrame(draw);
+            }
+            }
+            canv1.addEventListener('mousemove',function(e){
+                if(!running)
+                {
+                    clear();
+                             ball.x=e.clientX;
+                             ball.y=e.clientY;
+                             ball.draw();
+                }
+                
+            });
+            
+            canv1.addEventListener('click',function(e){if (!running){frame=window.requestAnimationFrame(draw);running=true;}});
+             canv1.addEventListener('mouseout',function(e){window.cancleAnimationFrame(frame);running=false;}
+                                   );
+            function clear(){
+                context.fillStyle='rgba(255,255,255,0.3)';
+                context.fillRect(0,0,canv1.width,canv1.height);
+            }
+            ball.draw();
+            square.draw();
+            triangle.draw();
+        </script>
+    </body>
+</html>

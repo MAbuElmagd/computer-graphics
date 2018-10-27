@@ -1,0 +1,53 @@
+<html>
+<head>
+    </head>
+    <body>
+        <canvas id='1' width='1000' height="1000">
+             <script>
+                 var conv=document.getElementById('1');
+                 var context=conv.getContext('2d');
+                 context.beginPath();
+                 context.arc(500,500,200,0,Math.PI*2,false);
+                 context.stroke();
+                 context.beginPath();
+                 context.moveTo(500,700);
+                 context.lineTo(630,350);
+                 context.lineTo(330,600);
+                 context.lineTo(670,600);
+                 context.lineTo(370,350);
+                 context.lineTo(500,700);
+                 context.stroke();
+                 context.beginPath();
+                 context.moveTo(400,330);
+                 context.lineTo(600,330);
+                 context.lineTo(500,450);
+                 context.lineTo(400,330);
+                 context.fill();
+                  context.beginPath();
+                 context.moveTo(320,580);
+                 context.lineTo(350,380);
+                 context.lineTo(420,500);
+                 context.lineTo(320,580);
+                 context.fill();
+                  context.beginPath();
+                 context.moveTo(450,610);
+                 context.lineTo(330,610);
+                 context.lineTo(480,700);
+                 context.lineTo(450,610);
+                 context.fill();
+                  context.beginPath();
+                 context.moveTo(510,690);
+                 context.lineTo(650,620);
+                 context.lineTo(540,610);
+                 context.lineTo(510,690);
+                 context.fill();
+                  context.beginPath();
+                 context.moveTo(670,590);
+                 context.lineTo(630,360);
+                 context.lineTo(590,500);
+                 context.lineTo(670,590);
+                 context.fill();
+        </script>
+        </canvas>
+    </body>
+</html>

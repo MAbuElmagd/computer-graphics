@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    </head>
+    <body onload="init()">
+    <canvas id="100" width="800" length="1000" ></canvas>
+    <script>
+       var canv1;
+        var context;
+         var img;
+        var x=0;
+        var y=0;
+        var w=40;
+        var h=30;
+        function init(){
+        canv1=document.getElementById('100');
+        context=canv1.getContext('2d') ;
+            img=new Image(w,h);
+     img.src="Titan.png"
+            img.onload=draw();
+                    document.onkeydown=update;
+            onload=obst();
+                    }
+        function draw(){
+            context.drawImage(img,x,y,w,h);
+        }
+        function obst(){
+            var i,z;
+           for (i = 50; i < 800; i+=50){
+               z=Math.floor(Math.random() * 1001); 
+              context.beginPath();
+               context.moveTo(x,0);
+               context.lineTo(x,z);
+               context.moveTo(x,z+100)
+               context.lineTo(x,1000)
+               context.stroke();
+           }
+        }
+         function update(event){
+                context.clearRect(x,y,w,h);
+                        switch(event.keyCode){
+                            case 65:
+                                    x-=50;
+                                    break;
+                            case 68:
+                                    x+=50;
+                                    break;
+                                case 87:
+                                    y-=50;
+                                    break;
+                                case 83:
+                                    y+=50;
+                                    break;
+                    }draw();
+                    }
+        function updateto(event){
+                context.clearRect(x,y,w,h);
+            x=event.pageX;
+            y=event.pageY;
+            draw();
+        }
+    </script>    
+   
+    </body>  
+</html>

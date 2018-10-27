@@ -1,0 +1,87 @@
+<html>
+<head></head>
+    <body>
+    <canvas id="s" width="900" height="900" style="border:solid">
+        </canvas>
+        <script>
+        var canv1=document.getElementById('s');
+            var context=canv1.getContext('2d');
+            var frame;
+            var running=false;
+            var ball={
+                x:100,y:100,r:25, c:'red',vx:5,vy:5,
+                draw:function(){
+                context.beginPath();
+ context.arc(this.x,this.y,this.r,0,Math.PI*2,true);
+                context.fillStyle=this.c;
+                context.fill();
+            }
+            }; var ball1={
+                x:700,y:700,r:25, c:'green',vx:5,vy:5,
+                draw:function(){
+                context.beginPath();
+ context.arc(this.x,this.y,this.r,0,Math.PI*2,true);
+                context.fillStyle=this.c;
+                context.fill();
+            }
+            }; var ball2={
+                x:100,y:700,r:25, c:'gray',vx:5,vy:5,
+                draw:function(){
+                context.beginPath();
+ context.arc(this.x,this.y,this.r,0,Math.PI*2,true);
+                context.fillStyle=this.c;
+                context.fill();
+            }
+            }; var ball3={
+                x:700,y:100,r:25, c:'orange',vx:5,vy:5,
+                draw:function(){
+                context.beginPath();
+ context.arc(this.x,this.y,this.r,0,Math.PI*2,true);
+                context.fillStyle=this.c;
+                context.fill();
+            }
+            };
+            function draw(){
+                clear();
+                ball.draw();
+                ball1.draw();
+                ball2.draw();
+                ball3.draw();
+                ball.x+=ball.vx;
+                ball.y+=ball.vy;
+                if(ball.x+ball.r>canv1.width||ball.x-ball.r<0||ball.x+ball.r>ball1.x+ball1.r||ball.x+ball.r>ball2.x+ball2.r||ball.x+ball.r>=ball3.x+ball3.r||ball.x-ball.r<=ball1.x-ball1.r||ball.x-ball.r<=ball2.x-ball2.r||ball.x-ball.r<ball3.x-ball3.r){ball.vx=-ball.vx;}
+                    if(ball.y+ball.r>canv1.height||ball.y-ball.r<0||ball.y+ball.r==ball1.y+ball1.r||ball.y+ball.r==ball2.y+ball2.r||ball.y+ball.r==ball3.y+ball3.r){ball.vy=-ball.vy;}
+                ball1.draw();
+                ball1.x+=ball1.vx;
+                ball1.y+=ball1.vy;
+                if(ball1.x+ball1.r>canv1.width||ball1.x-ball1.r<0||ball.x+ball.r==ball3.x+ball3.r||ball1.x+ball1.r==ball2.x+ball2.r||ball1.x+ball1.r==ball.x+ball.r){ball1.vx=-ball1.vx;}
+                    if(ball1.y+ball1.r>canv1.height||ball1.y-ball1.r<0||ball1.y+ball1.r==ball.y+ball.r||ball1.y+ball1.r==ball2.y+ball2.r||ball1.y+ball1.r==ball3.y+ball3.r){ball1.vy=-ball1.vy;}
+                ball2.draw();
+                ball2.x+=ball2.vx;
+                ball2.y+=ball2.vy;
+                if(ball2.x+ball2.r>canv1.width||ball2.x-ball2.r<0||ball2.x+ball2.r==ball1.x+ball1.r||ball.x+ball.r==ball2.x+ball2.r||ball2.x+ball2.r==ball3.x+ball3.r){ball2.vx=-ball2.vx;}
+                    if(ball2.y+ball2.r>canv1.height||ball2.y-ball2.r<0||ball2.y+ball2.r==ball1.y+ball1.r||ball.y+ball.r==ball2.y+ball2.r||ball2.y+ball2.r==ball3.y+ball3.r){ball2.vy=-ball2.vy;}
+                ball3.draw();
+                ball3.x+=ball3.vx;
+                ball3.y+=ball3.vy;
+                if(ball3.x+ball3.r>canv1.width||ball3.x-ball3.r<0||ball3.x+ball3.r==ball1.x+ball1.r||ball3.x+ball3.r==ball2.x+ball2.r||ball.x+ball.r==ball3.x+ball3.r){ball3.vx=-ball3.vx;}
+                    if(ball3.y+ball3.r>canv1.height||ball3.y-ball3.r<0||ball3.y+ball3.r==ball1.y+ball1.r||ball3.y+ball3.r==ball2.y+ball2.r||ball.y+ball.r==ball3.y+ball3.r){ball3.vy=-ball3.vy;}
+                
+                frame=window.requestAnimationFrame(draw);
+            }
+           
+            
+            canv1.addEventListener('mouseover',function(e){if (!running){frame=window.requestAnimationFrame(draw);running=true;}});
+             canv1.addEventListener('mouseout',function(e){window.cancleAnimationFrame(frame);running=false;}
+                                   );
+            function clear(){
+                context.fillStyle='rgba(255,255,255,0.3)';
+                context.fillRect(0,0,canv1.width,canv1.height);
+            }
+            ball.draw();
+            ball1.draw();
+            ball2.draw();
+            ball3.draw();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,89 @@
+<html>
+<head>
+    </head>
+    <body>
+    <canvas id="1" width="800" height="800"></canvas>
+        <script>
+        var canv = document.getElementById("1");
+var ctx = canv.getContext("2d");
+            var frame;
+            var running=false;
+            var ball1={
+                x:0,y:0,r:10,dx:5,dy:-5,c:"#246524",
+                draw:function(){
+                    ctx.fillStyle=this.c;
+                    ctx.fillRect(this.x,this.y,this.x+400,this.y+400);
+                    ctx.beginPath();
+                ctx.arc(this.x,this.y,this.r,0,2*Math.PI,false);
+                    ctx.fillStyle="black";
+                    ctx.fill();
+                }
+            };
+            var ball2={
+                x:400,y:400,r:10,dx:5,dy:-5,c:'#123421',
+                draw:function(){
+                    ctx.fillStyle=this.c;
+                    ctx.fillRect(this.x,this.y,this.x+400,this.y+400)
+                    ctx.beginPath();
+                ctx.arc(this.x,this.y,this.r,0,2*Math.PI,false);
+                      ctx.fillStyle="black";
+                    ctx.fill();
+                }
+            };
+            var ball3={
+                x:0,y:400,r:10,dx:5,dy:-5,c:"#131245"
+                draw:function(){
+                ctx.fillStyle=this.c;
+                    ctx.fillRect(this.x,this.y,this.x+400,this.y+400)
+                    ctx.beginPath();
+                ctx.arc(this.x,this.y,this.r,0,2*Math.PI,false);
+                  ctx.fillStyle="black";
+                    ctx.fill();
+                }
+            };var ball4={
+                x:400,y:0,r:10,dx:5,dy:-5,c:"#124532",
+                draw:function(){
+                    ctx.fillStyle=this.c;
+                    ctx.fillRect(this.x,this.y,this.x+400,this.y+400)
+                    ctx.beginPath();
+                ctx.arc(this.x,this.y,this.r,0,2*Math.PI,false);
+                      ctx.fillStyle="black";
+                    ctx.fill();
+                }
+            };
+            function draw(){
+                ctx.clearRect(0,0,canv.width,canv.height);
+                ball1.draw();
+                ball2.draw();
+                ball3.draw();
+                ball4.draw();
+                if(ball1.x<0||ball1.x>400){ball1.dx=-ball1.dx;}
+                if(ball1.y<0||ball1.y>400){ball1.dy=-ball1.dy;}
+                
+                if(ball2.x<400||ball2.x>800){ball2.dx=-ball2.dx;}
+                 if(ball2.y<400||ball2.y>800){ball2.dy=-ball2.dy;}
+                
+                if(ball3.x<0||ball3.x>400){ball3.dx=-ball3.dx;}
+                if(ball3.y<400||ball2.y>800){ball3.dy=-ball3.dy;}
+                
+                if(ball4.x<400||ball4.x>800){ball4.dx=-ball4.dx;}
+                if(ball4.y<0||ball4.y>400){ball4.dy=-ball4.dy;}
+                frame=window.requestAnimFrame(draw);
+            }
+            canv.addEventListener("click",function(){
+                if(!running){
+                     frame=window.requestAnimFrame(draw);
+                }
+            })
+            canv.addEventListener("mouseout",function(){
+                window.cancelAnimationFrame(frame);
+                running=true;
+            })
+            ball1.draw();
+            ball2.draw();
+            ball3.draw()
+            ball4.draw();
+            draw();
+        </script>
+    </body>
+</html>

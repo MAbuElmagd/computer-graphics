@@ -1,0 +1,20 @@
+<html>
+<head></head>
+    <body>
+    <canvas id="s" width="900" height="900" style="border:solid">
+        </canvas>
+        <script>
+        var canv1=document.getElementById('s');
+            var context=canv1.getContext('2d');
+            
+            context.fillStyle='red';
+            context.save();
+            context.fillRect(100,100,100,100);
+            context.fillStyle='blue';
+            context.fillRect(150,150,100,100);
+            context.restore();
+            context.fillRect(200,200,100,100);
+            
+              </script>
+    </body>
+</html>

@@ -1,0 +1,77 @@
+<html>
+<head>
+    <title>paddle</title>
+    </head>
+    <body>
+    <canvas id="s" width="900" height="900" style="border:solid"></canvas>
+    <script>
+        var canv1=document.getElementById('s');
+            var context=canv1.getContext('2d');
+         var frame;
+            var running=false;
+        var lives=3;
+        var Score=0;
+        var ball={
+                x:425,y:750,r:5, c:'black',vx:0.5,vy:-0.5,
+                draw:function(){
+                context.beginPath();
+ context.arc(this.x,this.y,this.r,0,Math.PI*2,true);
+                context.fillStyle=this.c;
+                context.fill();
+            }};
+        var block={w:5,h:2,c:'red',x,y,hit:1,
+                  draw:function(){
+                      for (this.y = 20; i <=26; y=y+3) {
+                  for (this.x = 20; i <canv1.width-w-20; x=x+6) {
+   context.beginPath();
+        context.rect(this.x,this.y,this.w,this.h);
+                      context.fillStyle=this.c;
+                context.fill();
+           context.closePath();
+} 
+                  }}};
+               var x=375;var y=800;var w=100;var h=10;
+       function pad(){
+                context.beginPath();
+        context.rect(x,y,w,h);
+                context.fill();
+           context.closePath();
+            }
+        function draw(){
+                clear();
+                ball.draw();
+            pad();
+                ball.x+=ball.vx;
+                ball.y+=ball.vy;
+        if(ball.x+ball.r>canv1.width||ball.x-ball.r<0){ball.vx=-ball.vx;}
+            if(ball.y+ball.r<0){ball.vy=-ball.vy;}
+            
+            if(ball.y+ball.r==y&&ball.x+ball.r>=x&&ball.x+ball.r<=x+w){ball.vy=-ball.vy;}
+            
+            
+            if(ball.y+ball.r>canv1.height&&lives>0){lives-=1;ball.y=0;}
+            if(lives==0){alert('game over');location.reload();}
+            ball.draw();
+        frame=window.requestAnimationFrame(draw);
+        }
+         canv1.addEventListener('click',function(e){if (!running){frame=window.requestAnimationFrame(draw);running=true;}}
+                               );
+        canv1.addEventListener('mousemove',function(e){
+             x=e.clientX;
+            frame=window.requestAnimationFrame(draw);
+            
+         });
+             canv1.addEventListener('mouseout',function(e){window.cancleAnimationFrame(frame);running=false;}
+                                   );
+         
+            function clear(){
+                context.fillStyle='rgba(255,255,255,0.3)';
+                context.fillRect(0,0,canv1.width,canv1.height);
+            }
+            ball.draw();
+        pad();
+                      block.draw();
+        </script>
+    
+    </body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    </head>
+    <body onload="init()">
+    <canvas id="100" width="800" height="1000" style="border: solid" ></canvas>
+    <script>
+       var canv1;
+        var context;
+         var img;
+        var start;
+        var end;
+        var x=0;
+        var y=0;
+        var w=40;
+        var h=30;
+        function init(){
+        canv1=document.getElementById('100');
+        context=canv1.getContext('2d') ;
+            img=new Image(w,h);
+     img.src="Titan.png"
+            img.onload=draw();
+                    document.onkeydown=update;
+             start=new Image(50,50);
+            start.src="rashomon.jpg";
+            end=new Image(50,50);
+            end.src="rashomon.jpg";
+            start.onload=draws();
+            end.onload=drawe();
+                    onload=obst();
+                    }
+        function draw(){
+           
+            context.drawImage(img,x,y,w,h);
+        }
+         function draws(){
+            context.drawImage(start,0,0,50,50);
+        }
+         function drawe(){
+            context.drawImage(end,750,950,50,50);
+        }
+        function obst(){
+            context.beginPath();
+            context.moveTo(50,0);
+            context.lineTo(50,100);
+            context.moveTo(50,200);
+            context.lineTo(50,1000);
+            context.moveTo(100,0);
+            context.lineTo(100,850);
+            context.moveTo(100,950);
+            context.lineTo(100,1000);
+            context.moveTo(150,0);
+            context.lineTo(150,100);
+            context.moveTo(150,200);
+            context.lineTo(150,1000);
+            context.moveTo(200,0);
+            context.lineTo(200,850);
+            context.moveTo(200,950);
+            context.lineTo(200,1000);
+            context.moveTo(250,0);
+            context.lineTo(250,100);
+            context.moveTo(250,200);
+            context.lineTo(250,1000);
+            context.moveTo(300,0);
+            context.lineTo(300,850);
+            context.moveTo(300,950);
+            context.lineTo(300,1000);
+            context.moveTo(350,0);
+            context.lineTo(350,100);
+            context.moveTo(350,200);
+            context.lineTo(350,1000);
+            context.moveTo(400,900);
+            context.lineTo(400,0);
+            context.moveTo(450,0);
+            context.lineTo(450,100);
+            context.moveTo(450,200);
+            context.lineTo(450,1000);
+            context.moveTo(500,0);
+            context.lineTo(500,850);
+            context.moveTo(500,950);
+            context.lineTo(500,1000);
+            context.moveTo(550,0);
+            context.lineTo(550,100);
+            context.moveTo(550,200);
+            context.lineTo(550,1000);
+            context.moveTo(600,0);
+            context.lineTo(600,850);
+            context.moveTo(600,950);
+            context.lineTo(600,1000);
+            context.moveTo(650,0);
+            context.lineTo(650,100);
+            context.moveTo(650,200);
+            context.lineTo(650,1000);
+            context.moveTo(700,0);
+            context.lineTo(700,850);
+            context.moveTo(700,950);
+            context.lineTo(700,1000);
+            context.moveTo(750,0);
+            context.lineTo(750,100);
+            context.moveTo(750,200);
+            context.lineTo(750,1000);
+            context.stroke();
+        }
+         function update(event){
+                context.clearRect(x,y,w,h);
+              drawe();
+            draws();
+             obst();
+                        switch(event.keyCode){
+                            case 65:
+                                    x-=10;
+                                    break;
+                            case 68:
+                                    x+=10;
+                                    break;
+                                case 87:
+                                    y-=10;
+                                    break;
+                                case 83:
+                                    y+=10;
+                                    break;
+                                
+                    }if(x>770){ x-=10;}
+                        if(x<0){x+=10;}
+                                if(y>970){ y-=10;}
+             if(y<0){y+=10;}
+             draw();
+                    }
+        function updateto(event){
+                context.clearRect(x,y,w,h);
+             drawe();
+            draws();
+            x=event.pageX;
+            y=event.pageY;
+            draw();
+        }
+    </script>    
+   
+    </body>  
+</html>

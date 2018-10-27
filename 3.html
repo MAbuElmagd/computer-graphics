@@ -1,0 +1,23 @@
+<html>
+<head>
+    </head>
+    <body>
+        
+        <canvas id='1' width='1000'Style='border:solid #fff000' height="1000">
+             <script>
+                 var conv=document.getElementById('1');
+                 var context=conv.getContext('2d');
+               var img=new Image();
+                 img.src="Sunset.jpg";
+                 var lg=context.createLinearGradient(0,0,500,0);
+                 lg.addColorStop(0.2,'rgb(160,150,10)');
+                 lg.addColorStop(0.5,'rgb(240,120,0)');
+                 lg.addColorStop(0.8,'rgb(20,30,100)');
+                 context.fillStyle=lg;
+                 context.fillRect(50,50,500,700);
+                 context.fill();
+                 
+                 </script>
+        </canvas>
+    </body>
+</html>

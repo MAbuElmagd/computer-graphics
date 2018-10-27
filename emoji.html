@@ -1,0 +1,28 @@
+<html>
+<head>
+    </head>
+    <body>
+        <canvas id='1' width='1000' height="1000">
+             <script>
+                 var conv=document.getElementById('1');
+                 var context=conv.getContext('2d');
+                 context.fillStyle="yellow";
+                 context.beginPath();
+                 context.arc(500,500,200,0,Math.PI*2,false);
+                 context.fill();
+                 context.fillStyle="black";
+                 context.moveTo(470, 450);
+                 context.beginPath();
+                 context.arc(450, 450, 20, 0, Math.PI*2, true);
+                 context.moveTo(570, 450);
+                 context.arc(550, 450, 20, 0, Math.PI*2, true);
+                 context.fill();
+                 context.moveTo(500, 550);
+                 context.arc(500, 550, 100, 0, Math.PI, false); 
+                 context.moveTo(550, 550);
+                 context.lineTo(400, 550);
+                 context.stroke();
+        </script>
+        </canvas>
+    </body>
+</html>
